@@ -1,12 +1,8 @@
-import { type FC } from 'react'
 import { useTranslation } from 'react-i18next'
 import {Button} from "@mui/material";
 
-interface PageErrorProps {
-  className?: string
-}
 
-export const PageError: FC<PageErrorProps> = ({ className }) => {
+export const PageError = () => {
   const { t } = useTranslation()
 
   const onReloadPage = (): void => {

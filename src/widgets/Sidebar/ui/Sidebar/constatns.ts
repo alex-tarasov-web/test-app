@@ -1,3 +1,4 @@
+import {ReactNode} from "react";
 import {
   RouteRounded as RouteRoundedIcon,
   BusinessCenterRounded as BusinessCenterRoundedIcon,
@@ -6,26 +7,39 @@ import {
   AccountCircleRounded as AccountCircleRoundedIcon
 } from "@mui/icons-material";
 
-export const SideBarRoutes = [
+type Icon = typeof RouteRoundedIcon
+
+interface Sidebar {
+  pathname: string
+  icon: Icon
+  name: string
+}
+
+export const SideBarRoutes: Sidebar[] = [
   {
-    pathname: 'rode',
-    icon: RouteRoundedIcon
+    pathname: '/dashboard/trips',
+    icon: RouteRoundedIcon,
+    name: 'Trips'
   },
   {
-    pathname: 'deals',
-    icon: BusinessCenterRoundedIcon
+    pathname: '/dashboard/deals',
+    icon: BusinessCenterRoundedIcon,
+    name: 'Deals'
   },
   {
-    pathname: 'team',
-    icon: GroupsRoundedIcon
+    pathname: '/dashboard/teams',
+    icon: GroupsRoundedIcon,
+    name: 'Teams'
   },
   {
-    pathname: 'analytics',
-    icon: DataSaverOffRoundedIcon
+    pathname: '/dashboard/analytics',
+    icon: DataSaverOffRoundedIcon,
+    name: 'Analytics',
   },
   {
-    pathname: 'users',
-    icon: AccountCircleRoundedIcon
+    pathname: '/dashboard/users',
+    icon: AccountCircleRoundedIcon,
+    name: 'Users'
   },
 
 

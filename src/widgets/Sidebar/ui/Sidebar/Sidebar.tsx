@@ -1,27 +1,23 @@
-import React, {type FC, ReactNode, useState} from 'react'
+import React, {useState} from 'react'
 import {
   Box,
   Drawer, IconButton,
-  Stack,
+  Stack, Typography,
 } from "@mui/material";
 import {
-  RouteRounded as RouteRoundedIcon,
   SettingsRounded as SettingsRoundedIcon,
-  BusinessCenterRounded as BusinessCenterRoundedIcon,
-  GroupsRounded as GroupsRoundedIcon,
-  DataSaverOffRounded as DataSaverOffRoundedIcon,
-  AccountCircleRounded as AccountCircleRoundedIcon,
 } from '@mui/icons-material';
 import {NAVBAR_HEIGHT} from "../../../../constants/siteStyleSettins";
-import {useLocation} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import {SideBarRoutes} from "./constatns";
+import {useTranslation} from "react-i18next";
 
 const COLLAPSED_DRAWER_WIDTH = 80
 
-
 export const Sidebar = () => {
+  const {t} = useTranslation()
   const location = useLocation()
-
+  const navigate = useNavigate()
   const [open, setOpen] = useState(false)
 
   const onMouseEnter = () => setOpen(true)
@@ -34,17 +30,14 @@ export const Sidebar = () => {
       open={open}
       sx={{
         width: COLLAPSED_DRAWER_WIDTH,
-        position: 'relative',
         height: 1,
-        flexShrink: 0,
-        whiteSpace: 'nowrap',
-        boxSizing: 'border-box'
       }}
     >
       <Box
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
         sx={{
+          overflow: 'hidden',
           width: open ? 240 : COLLAPSED_DRAWER_WIDTH,
           transition: 'width 0.2s',
           // TODO: Take it from palette
@@ -55,38 +48,58 @@ export const Sidebar = () => {
         }}>
 
         <Stack
-          alignItems='center'
           sx={{mb: 4, height: '100%'}}
         >
           <Box sx={{height: NAVBAR_HEIGHT}}/>
 
           <Stack
-            alignItems='center'
             spacing={2}
-            sx={{height: 1}}
+            sx={{
+              mx: 2,
+              height: 1
+          }}
           >
             {SideBarRoutes.map((sidebarRoute) => {
               const isActive = sidebarRoute.pathname === location.pathname
+
               return (
-                <IconButton
-                  size='large'
-                  sx={{
-                    backgroundColor: isActive ? 'white' : 'grey',
-                    borderRadius: 2.5
-                  }}
-                  key={sidebarRoute.pathname}
-                >
-                  <sidebarRoute.icon
-                    sx={{color: isActive ? '#A5A6F6' : 'red'}}
-                  />
-                </IconButton>
+                <Stack spacing={2} direction='row' alignItems='center'>
+                  <IconButton
+                    size='large'
+                    sx={{
+                      backgroundColor: isActive ? 'white' : '#A5A6F6',
+                      borderRadius: 2.5,
+                      ':hover > svg': {
+                        color: 'black'
+                      }
+                    }}
+                    onClick={(e) => {
+                      navigate(sidebarRoute.pathname)
+                    }}
+                    key={sidebarRoute.pathname}
+                  >
+                    <sidebarRoute.icon
+                      sx={{
+                        color: isActive ? '#A5A6F6' : 'black',
+                    }}
+                    />
+                  </IconButton>
+
+                  {/* TODO: prepare translations for the sidebarRoute names */}
+                  {open && <Typography>{sidebarRoute.name}</Typography>}
+                </Stack>
               )
             })}
           </Stack>
 
-          <IconButton color="inherit" size='large'>
-            <SettingsRoundedIcon fontSize='large'/>
-          </IconButton>
+          <Stack direction='row' alignItems='center' spacing={2} sx={{ mx: 1.5 }}>
+            <IconButton size='large' sx={{ borderRadius: 2.5 }}>
+              <SettingsRoundedIcon fontSize='large' sx={{ color: 'black' }}/>
+            </IconButton>
+
+
+            {open && <Typography>{t('Settings')}</Typography>}
+          </Stack>
         </Stack>
       </Box>
     </Drawer>

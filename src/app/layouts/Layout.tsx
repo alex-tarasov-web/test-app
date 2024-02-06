@@ -7,9 +7,18 @@ import {PageLoader} from "../../widgets/PageLoader";
 
 export const Layout = () => {
   const {isLoading} = useContext(AuthContext)
-  console.log('isLoading', isLoading)
+
   return (
-    <Container maxWidth={false} disableGutters sx={{minHeight: '100vh'}}>
+    <Container
+      maxWidth={false}
+      disableGutters
+      sx={{
+        // TODO: Move this #F3F3F3 color into light.palette.background.default
+        backgroundColor: '#F3F3F3',
+        minHeight: '100vh',
+        display: 'flex'
+      }}
+    >
       <Sidebar/>
       {isLoading ? <PageLoader/> : <Outlet/>}
     </Container>

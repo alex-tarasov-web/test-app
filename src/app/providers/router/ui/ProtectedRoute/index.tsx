@@ -10,6 +10,7 @@ type ProtectedRouteProps = RouteProps & {
 const ProtectedRoute = ({redirectPath = '/', children, ...props}: ProtectedRouteProps):JSX.Element  => {
   const {isSignedIn, isLoading} = useContext(AuthContext)
 
+  // Commented out while authorization is missing
   // if (!isSignedIn && !isLoading) {
   //   return <Navigate to={redirectPath} replace/>;
   // }

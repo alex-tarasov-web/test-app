@@ -3,5 +3,15 @@
   "Page not found": "Page not found",
   "An unexpected error has occurred": "An unexpected error has occurred",
   "Reaload the page": "Reaload the page",
-  "Dashboard": "Dashboard"
+  "Dashboard": "Dashboard",
+  "Trips": "Trips",
+  "Deals": "Deals",
+  "Add deal": "Add deal",
+  "Add Trip": "Add Trip",
+  "Add User": "Add User",
+  "Teams": "Teams",
+  "Add team": "Add team",
+  "Analytics": "Analytics",
+  "Add chart": "Add chart",
+  "Settings": "Settings"
 }
